@@ -17,10 +17,10 @@ char *f_fillment(struct formating* new_format, long double arg) {
     }
     char* float_str = (char*)x_calloc(100, sizeof(char));
     find_flag_to_float(new_format, &temp_arg, float_str);  // проверяем был ли флаг и кладем знак
-    uint64_t fullfloteg = temp_arg * pow(10, 15);  // все цифры числа
-    uint64_t intfloteg = (long int)temp_arg * pow(10, 15);  // целая часть для получения дробной
-    uint64_t leftpart = (long int)temp_arg;  // целая часть
-    uint64_t rightpart = fullfloteg - intfloteg;  // дробная часть
+    long double rightpart = 0;
+    long double leftpart = 0;
+    rightpart = modfl(temp_arg, &leftpart);
+    rightpart = (rightpart * powl(10,19));
 
     if (new_format->flag.plus || new_format->flag.space || is_negative == 1) {
         // если были флаги или число было отрицательным
@@ -48,8 +48,8 @@ char *f_fillment(struct formating* new_format, long double arg) {
     return float_str;
 }
 
-int check_rightpart_zeroes(uint64_t rightpart) {
-    return 15 - count_char(rightpart);
+int check_rightpart_zeroes(long int rightpart) {
+    return 19 - count_char(rightpart);
 }
 
 void round_value(char *float_str, int precision) {

@@ -72,13 +72,14 @@ void check_width(struct formating* new_format, const char** format, int* flag) {
 
 void check_precision(struct formating* new_format, const char** format, int* flag) {
     if (**format == '.') {
-        if (*(*format + 1) == 's' || *(*format) + 1 == 'd') {
-            new_format->precision = 0;
-            *flag = IS_PRECISION;
-        } else {
+        if (*(*format + 1) >= '0' && *(*format + 1) <= '9') {
             (*format)++;
             new_format->precision = ascii_to_int(format);
             *flag = IS_PRECISION;
+        } else {
+            new_format->precision = 0;
+            *flag = IS_PRECISION;
+            (*format)++;
         }
     }
 }

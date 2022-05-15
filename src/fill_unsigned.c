@@ -52,7 +52,7 @@ char *unsigned_to_str(struct formating* new_format, unsigned long int number, ch
     long int counter = length;
     find_precision_to_unsigned(new_format, &str, length);
     unsigned long int remainder = number;
-    long int power = 0;
+    unsigned long int power = 0;
     while (counter > 0) {
         power = pow(10, counter - 1);
         *str++ = (remainder / power) + '0';
