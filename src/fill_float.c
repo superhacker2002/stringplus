@@ -20,7 +20,8 @@ char *f_fillment(struct formating* new_format, long double arg) {
     long double rightpart = 0;
     long double leftpart = 0;
     rightpart = modfl(temp_arg, &leftpart);
-    rightpart = (rightpart * powl(10, 18));
+    rightpart = (long long int)(rightpart * powl(10, 18));
+    leftpart = (long long int)leftpart;
 
     if (new_format->flag.plus || new_format->flag.space || is_negative == 1) {
         // если были флаги или число было отрицательным
@@ -48,7 +49,7 @@ char *f_fillment(struct formating* new_format, long double arg) {
     return float_str;
 }
 
-int check_rightpart_zeroes(long int rightpart) {
+int check_rightpart_zeroes(long long int rightpart) {
     return 18 - count_char(rightpart);
 }
 
