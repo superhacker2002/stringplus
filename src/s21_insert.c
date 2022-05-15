@@ -8,14 +8,14 @@ void *s21_insert(const char *src, const char *str, s21_size_t start_index) {
     if (str && src && str[0] != '\0') {
         s21_size_t str_length = s21_strlen(str);
         s21_size_t src_length = s21_strlen(src);
-        s21_size_t i = 0;
-        s21_size_t j;
-        s21_size_t k;
         buffer = (char *)x_calloc(src_length + str_length + 1, sizeof(char));
         // выделяем память под новую строку длинной = str + src
 
-        if (buffer && start_index < src_length && src && str) {
-            // если память выделилась и start_index меньше чем основная строка
+        if (buffer && start_index < src_length) {
+            s21_size_t i = 0;
+            s21_size_t j;
+            s21_size_t k;
+                // если память выделилась и start_index меньше чем основная строка
             for (; i < start_index; ++i) {  // заполняем новый массив от 0 до start_index
                 buffer[i] = src[i];
             }

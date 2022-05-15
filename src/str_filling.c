@@ -68,9 +68,9 @@ void add_width(struct formating *new_format, char *str, int length) {
     int len = length;
     char str_copy[100];  // создаем копию строки
     s21_strcpy(str_copy, str);
-    char spaces[100];  // буфер для пробелов
 
     if (width && width > len) {  // есть ширина
+        char spaces[100];  // буфер для пробелов
         s21_memset(spaces, ' ',
                    width - len);  // заполняем пробелами до начала числа
         spaces[width - len] = '\0';

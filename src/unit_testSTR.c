@@ -2,6 +2,7 @@
 #include "s21_string.h"
 #include <string.h>
 #include <limits.h>
+#include <stdio.h>
 
 char mass1[100] = {'\0'}, mass2[100] = {'\0'}; 
 char Lmass1[255] = {'\0'}, Lmass2[255] = {'\0'};

@@ -52,8 +52,8 @@ char *unsigned_to_str(struct formating* new_format, unsigned long int number, ch
     long int counter = length;
     find_precision_to_unsigned(new_format, &str, length);
     unsigned long int remainder = number;
-    unsigned long int power = 0;
     while (counter > 0) {
+        unsigned long int power = 0;
         power = pow(10, counter - 1);
         *str++ = (remainder / power) + '0';
         remainder = number % power;
@@ -64,8 +64,8 @@ char *unsigned_to_str(struct formating* new_format, unsigned long int number, ch
 }
 
 void find_precision_to_unsigned(struct formating* new_format, char **str, int length) {
-    int zeroes_counter = 0;
     if (new_format->precision) {
+        int zeroes_counter = 0;
         while (zeroes_counter < new_format->precision - length) {
             **str = '0';
             zeroes_counter++;

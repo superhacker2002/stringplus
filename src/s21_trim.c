@@ -5,10 +5,11 @@
 // и конечные вхождения набора заданных символов (trim_chars) из данной строки (src)
 void *s21_trim(const char *src, const char *trim_chars) {
     char *result = s21_NULL;
-    int target_pass = 0, k = 0, target = 0;
-    char *trim_buff;
+    int target = 0;
 
     if (src && trim_chars) {  // если нам пришли не нал-поинтеры
+        char *trim_buff;
+        int target_pass = 0, k = 0;
         result = (char*)x_calloc((s21_strlen(src) +
                          1), sizeof(char));  // выделяем память под результирующую строку
 

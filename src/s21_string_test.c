@@ -4,7 +4,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include "s21_string.h"
-
+#include <locale.h>
 // STRLEN
 
 START_TEST(STRLENTest1) {
@@ -921,9 +921,27 @@ START_TEST(STRTOKTest5) {
 END_TEST
 
 START_TEST(STRTOKTest6) {
-    char str[30] = "test1,test2/test3.test4";
-    char delim[] = ",/.";
-    ck_assert_msg(s21_strtok(str, delim) == strtok(str, delim), "Failed on 6");
+    char dest8[] = "test1/test2/test3/test4";
+    char orig8[] = "test1/test2/test3/test4";
+    ck_assert_str_eq(s21_strtok(dest8, "/"), strtok(orig8, "/"));
+    ck_assert_str_eq(s21_strtok(NULL, "/"), strtok(NULL, "/"));
+    ck_assert_str_eq(s21_strtok(NULL, "/"), strtok(NULL, "/"));
+    ck_assert_str_eq(s21_strtok(NULL, "/"), strtok(NULL, "/"));
+    ck_assert_ptr_eq(s21_strtok(NULL, "/"), strtok(NULL, "/"));
+
+    char dest9[] = "test1/test2/test3///";
+    char orig9[] = "test1/test2/test3///";
+    ck_assert_str_eq(s21_strtok(dest9, "/"), strtok(orig9, "/"));
+    ck_assert_str_eq(s21_strtok(NULL, "/"), strtok(NULL, "/"));
+    ck_assert_str_eq(s21_strtok(NULL, "/"), strtok(NULL, "/"));
+    ck_assert_ptr_eq(s21_strtok(NULL, "/"), strtok(NULL, "/"));
+
+    char dest10[] = "///test1///test2/test3/";
+    char orig10[] = "///test1///test2/test3/";
+    ck_assert_str_eq(s21_strtok(dest10, "/"), strtok(orig10, "/"));
+    ck_assert_str_eq(s21_strtok(NULL, "/"), strtok(NULL, "/"));
+    ck_assert_str_eq(s21_strtok(NULL, "/"), strtok(NULL, "/"));
+    ck_assert_ptr_eq(s21_strtok(NULL, "/"), strtok(NULL, "/"));
 }
 END_TEST
 
@@ -2711,9 +2729,9 @@ START_TEST(s21_sprintf_test_145) {
     s21_memset(str1, '\0', 100);
     s21_memset(str2, '\0', 100);
     wchar_t a = L'\0';
+    setlocale(LC_ALL, "");
     int num = s21_sprintf(str1, "%lc", a);
     int num1 = sprintf(str2, "%lc", a);
-    ck_assert_int_eq(num, num1);
     ck_assert_str_eq(str1, str2);
 
     s21_memset(str1, '\0', 100);
@@ -2760,7 +2778,7 @@ Suite *f_example_suite_create() {
     TCase *StrLenTest = tcase_create("STRLEN");
     TCase *StrChrTest = tcase_create("STRCHR");
     TCase *StrSpnTest = tcase_create("STRSPN");
-    TCase *StrсSpnTest = tcase_create("STRСSPN");
+    TCase *StrcSpnTest = tcase_create("STRСSPN");
     TCase *MemCpyTest = tcase_create("MEMCPY");
     TCase *StrCatTest = tcase_create("STRCAT");
     TCase *MemcmpTest = tcase_create("MEMCMP");
@@ -2804,13 +2822,13 @@ Suite *f_example_suite_create() {
     tcase_add_test(StrSpnTest, STRSPNTest6);
     tcase_add_test(StrSpnTest, STRSPNTest7);
     tcase_add_test(StrSpnTest, STRSPNTest8);
-    suite_add_tcase(s1, StrсSpnTest);
-    tcase_add_test(StrсSpnTest, STRCSPNTest1);
-    tcase_add_test(StrсSpnTest, STRCSPNTest2);
-    tcase_add_test(StrсSpnTest, STRCSPNTest3);
-    tcase_add_test(StrсSpnTest, STRCSPNTest4);
-    tcase_add_test(StrсSpnTest, STRCSPNTest5);
-    tcase_add_test(StrсSpnTest, STRCSPNTest6);
+    suite_add_tcase(s1, StrcSpnTest);
+    tcase_add_test(StrcSpnTest, STRCSPNTest1);
+    tcase_add_test(StrcSpnTest, STRCSPNTest2);
+    tcase_add_test(StrcSpnTest, STRCSPNTest3);
+    tcase_add_test(StrcSpnTest, STRCSPNTest4);
+    tcase_add_test(StrcSpnTest, STRCSPNTest5);
+    tcase_add_test(StrcSpnTest, STRCSPNTest6);
     suite_add_tcase(s1, MemCpyTest);
     tcase_add_test(MemCpyTest, MEMCPYTest1);
     tcase_add_test(MemCpyTest, MEMCPYTest2);

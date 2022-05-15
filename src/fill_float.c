@@ -20,7 +20,7 @@ char *f_fillment(struct formating* new_format, long double arg) {
     long double rightpart = 0;
     long double leftpart = 0;
     rightpart = modfl(temp_arg, &leftpart);
-    rightpart = (rightpart * powl(10,19));
+    rightpart = (rightpart * powl(10, 18));
 
     if (new_format->flag.plus || new_format->flag.space || is_negative == 1) {
         // если были флаги или число было отрицательным
@@ -49,7 +49,7 @@ char *f_fillment(struct formating* new_format, long double arg) {
 }
 
 int check_rightpart_zeroes(long int rightpart) {
-    return 19 - count_char(rightpart);
+    return 18 - count_char(rightpart);
 }
 
 void round_value(char *float_str, int precision) {

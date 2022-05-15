@@ -51,8 +51,8 @@ void find_flag_to_int(struct formating* new_format, long int* number, char **str
 }
 
 void find_precision_to_int(struct formating* new_format, char **str, long int number) {
-    int zeroes_counter = 0;
     if (new_format->precision > 0) {
+        int zeroes_counter = 0;
         while (zeroes_counter < new_format->precision - count_char(number)) {
             **str = '0';
             zeroes_counter++;
@@ -84,9 +84,9 @@ char *int_to_str(struct formating* new_format, long int number, char *str) {
         find_precision_to_int(new_format, &str, number);
     }
     long int remainder = number;
-    long int power = 0;
     long int counter = count_char(number);
     while (counter > 0) {
+        long int power = 0;
         power = pow(10, counter - 1);
         *str++ = (remainder / power) + '0';
         remainder = number % power;

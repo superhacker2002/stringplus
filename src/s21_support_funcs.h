@@ -13,7 +13,7 @@ int ascii_to_int(const char** str);
 void choose_specificator(struct formating* new_format, char** str, va_list arg, int* str_length);
 
 void add_not_valid(const char** format, char** str, int* str_length);
-int parse_till_percent(struct formating* new_format, const char** format, char** str, va_list arg, int* str_len);
+void parse_till_percent(struct formating* new_format, const char** format, char** str, va_list arg, int* str_len);
 void add_first_char(struct formating* new_format, const char** format, char** str);
 void add_chars(struct formating* new_format, const char** format, char** str, int* str_length);
 

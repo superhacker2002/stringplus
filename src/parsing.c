@@ -25,10 +25,9 @@ int parse(struct formating *new_format, const char **format) {
     return exit_flag;
 }
 
-int parse_till_percent(struct formating *new_format, const char **format,
+void parse_till_percent(struct formating *new_format, const char **format,
                        char **str, va_list arg, int *str_length) {
     int parse_result = 0;
-    int is_null_sym = 0;
     while (**format != '%' && **format != '\0') {
         // пока не дойдем до следующего процента
         parse_result = parse(new_format, format);
@@ -48,10 +47,9 @@ int parse_till_percent(struct formating *new_format, const char **format,
             parse_result = 0;
         }
     }
-    if (parse_result != IS_SPEC && !is_null_sym) {
+    if (parse_result != IS_SPEC) {
         check_percent(new_format, format, str, str_length);
     }
-    return is_null_sym;
 }
 
 void check_percent(struct formating *new_format, const char **format,

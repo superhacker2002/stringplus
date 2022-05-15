@@ -33,9 +33,9 @@ s21_string.a: $(OBJ)
 test: $(TEST)
 
 $(TEST):
-	$(CC) -Wall -Werror -Wextra -g $(SRC) $(SPRINTF_SRC) test_lol.c -o $@ $(LDFLAGS)
+	$(CC) -Wall -Werror -Wextra -g $(SRC) $(SPRINTF_SRC) $(SRC_TEST) -o $@ $(LDFLAGS)  --coverage
 	@echo "---------------------------TESTS--------------------------------------"
-	./$(TEST)
+	CK_FORK=no valgrind --vgdb=no --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=RESULT_VALGRIND.txt ./$(TEST)
 	@echo "----------------------------------------------------------------------"
 
 gcov_report: test 
