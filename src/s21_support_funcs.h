@@ -40,7 +40,7 @@ void find_precision_to_unsigned(struct formating* new_format, char **str, int le
 char *f_fillment(struct formating* new_format, long double arg);
 void find_flag_to_float(struct formating* new_format, long double* number, char *str);
 void round_value(char* float_str, int precision);
-int check_rightpart_zeroes(uint64_t rightpart);
+int check_rightpart_zeroes(long int rightpart);
 
 void* x_calloc(size_t nmemb, size_t size);
 
