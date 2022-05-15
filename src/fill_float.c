@@ -1,7 +1,6 @@
 #include "s21_sprintf.h"
 #include "s21_support_funcs.h"
 
-
 char *f_fillment(struct formating* new_format, long double arg) {
     int precision = 0;  // если мы не получили точность от пользователя оставляем её дефолтной
     long double temp_arg = arg;
@@ -20,7 +19,7 @@ char *f_fillment(struct formating* new_format, long double arg) {
     long double rightpart = 0;
     long double leftpart = 0;
     rightpart = modfl(temp_arg, &leftpart);
-    rightpart = (long long int)(rightpart * powl(10, 18));
+    rightpart = (long long int)(rightpart * powl(10, 19));
     leftpart = (long long int)leftpart;
 
     if (new_format->flag.plus || new_format->flag.space || is_negative == 1) {
@@ -50,7 +49,7 @@ char *f_fillment(struct formating* new_format, long double arg) {
 }
 
 int check_rightpart_zeroes(long long int rightpart) {
-    return 18 - count_char(rightpart);
+    return 19 - count_char(rightpart);
 }
 
 void round_value(char *float_str, int precision) {

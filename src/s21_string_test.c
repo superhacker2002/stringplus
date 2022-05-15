@@ -1324,8 +1324,8 @@ START_TEST(s21_sprintf_test_10) {
     char data1[100];
     s21_memset(data, '\0', 100);
     s21_memset(data1, '\0', 100);
-    int c = s21_sprintf(data, "|%-20.18u| ", -345);
-    int d = sprintf(data1, "|%-20.18u| ", -345);
+    int c = s21_sprintf(data, "|%-20.18u%.f| ", -345, -2.5);
+    int d = sprintf(data1, "|%-20.18u%.f| ", -345, -2.5);
     ck_assert_int_eq(c, d);
 }
 END_TEST

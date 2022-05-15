@@ -22,12 +22,12 @@ LDFLAGS = -lcheck
 
 .PHONY: all, clean, test, s21_string.a, gcov_report
 
-all: clean s21_string.a test
+all: clean s21_string.a
 
 s21_string.a: $(OBJ)
 	ar rcs s21_string.a $?
 
-%.o: %.c $(HEADER)
+%.o: %.c
 	$(CC) $(СFLAGS) -c $< -o $@ $(LDFLAGS)
 
 test: $(TEST)
@@ -35,7 +35,7 @@ test: $(TEST)
 $(TEST):
 	$(CC) -Wall -Werror -Wextra -g $(SRC) $(SPRINTF_SRC) $(SRC_TEST) -o $@ $(LDFLAGS)  --coverage
 	@echo "---------------------------TESTS--------------------------------------"
-	CK_FORK=no valgrind --vgdb=no --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=RESULT_VALGRIND.txt ./$(TEST)
+	./$(TEST)
 	@echo "----------------------------------------------------------------------"
 
 gcov_report: test 
