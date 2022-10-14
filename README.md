@@ -5,10 +5,10 @@ Implementation of the string.h library with additions.
 
 ## Contents
 1. [Introduction](#introduction)
-2. [Information](#information)
-    2.1. [s21_string.h Types](#types)  
-    2.2. [s21_string.h Macro](#macro)  
-    2.3. [s21_string.h Functions](#functions)  
+2. [Information](#information) \
+    2.1. [s21_string.h Types](#types) \
+    2.2. [s21_string.h Macro](#macro) \
+    2.3. [s21_string.h Functions](#functions) \  
     2.4. [s21_sprintf](#s21_sprintf) 
 
 ## Introduction
